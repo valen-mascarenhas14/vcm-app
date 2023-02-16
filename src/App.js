@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // Bootstrap Bundle JS
 import "bootstrap/dist/js/bootstrap.bundle.min";
 
-//const licenseTypes = ['Type A', 'Type B', 'Type C'];
 
 const licenseTypes = [
     "Apache-2.0",
@@ -36,15 +35,16 @@ const licenseTypes = [
 const Form = () => {
   const [licenses, setLicenses] = useState([{ type: '', url: '' }]);
   const [packageUrlError, setPackageUrlError] = useState("");
-  const [rtcUrlError, setRtcUrlError] = useState(""); 
-  const [rtcTaskUrl, setRtcTaskUrl] = useState('');
+  // const [rtcUrlError, setRtcUrlError] = useState(""); 
+  // const [rtcTaskUrl, setRtcTaskUrl] = useState('');
   const [claUrlError, setClaUrlError] = useState("");
+  const [licenseUrlError, setLicenseUrlError] = useState([]);
   const [boxUrlError, setBoxUrlError] = useState("");
   const [packageName, setPackageName] = useState('');
   const [packageUrl, setPackageUrl] = useState('');
   const [claUrl, setClaUrl] = useState('');
   const [boxUrl, setBoxkUrl] = useState('');
-  const [dueDate, setDueDate] = useState('');
+  // const [dueDate, setDueDate] = useState('');
 
   const handleLicenseTypeChange = (event, index) => {
     const updatedLicenses = [...licenses];
@@ -54,8 +54,41 @@ const Form = () => {
 
   const handleLicenseUrlChange = (event, index) => {
     const updatedLicenses = [...licenses];
+
     updatedLicenses[index].url = event.target.value;
     setLicenses(updatedLicenses);
+
+
+
+    const input = document.getElementById(`licenseType-${index}`);
+    console.log(input.validity.valid);
+
+    input.addEventListener('blur', function() {
+      if (!input.validity.valid) {
+        input.classList.add('error');
+        input.nextElementSibling.innerHTML = 'Please enter a valid url.';
+      } else if (!input){
+        input.classList.add('error');
+        input.nextElementSibling.innerHTML = 'License URL cannot be empty.';
+      }
+       else {
+        input.classList.remove('error');
+        input.nextElementSibling.innerHTML = '';
+      }
+    });
+    
+    // const url = event.target.value;
+    // if (!url) {
+    //   setLicenseUrlError[index]("License URL cannot be empty.");
+    //   console.log(index);
+    //   console.log("im in handlelicenseurlchange");
+    // } else if (!validateUrl(url)) {
+    //   setLicenseUrlError[index]("Please enter a valid URL.");
+    // } else {
+    //   setLicenseUrlError[index]("");
+    // }
+
+
   };
 
   
@@ -64,10 +97,13 @@ const Form = () => {
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
     return urlRegex.test(url);
   };
+
+
   
   const handlePackageUrlChange = (event) => {
     const url = event.target.value;
-    setPackageUrl(url);
+    //const url = event;
+    //setPackageUrl(url);
     if (!url) {
       setPackageUrlError("Package URL cannot be empty.");
     } else if (!validateUrl(url)) {
@@ -77,23 +113,23 @@ const Form = () => {
     }
   };
 
-  const handleRtcUrlChange = (event) => {
-    const url = event.target.value;
-    setPackageUrl(url);
-    if (!url) {
-      setRtcUrlError("RTC URL cannot be empty.");
-    } else if (!validateUrl(url)) {
-      setRtcUrlError("Please enter a valid URL.");
-    } else {
-      setRtcUrlError("");
-    }
-  };
+  // const handleRtcUrlChange = (event) => {
+  //   const url = event.target.value;
+  //   setPackageUrl(url);
+  //   if (!url) {
+  //     setRtcUrlError("RTC URL cannot be empty.");
+  //   } else if (!validateUrl(url)) {
+  //     setRtcUrlError("Please enter a valid URL.");
+  //   } else {
+  //     setRtcUrlError("");
+  //   }
+  // };
   
 
 
   const handleClaUrlChange = (event) => {
     const url = event.target.value;
-    setClaUrl(url);
+    //setClaUrl(url);
     if (!url) {
       setClaUrlError("CLA URL cannot be empty.");
     } else if (!validateUrl(url)) {
@@ -105,7 +141,7 @@ const Form = () => {
 
   const handleBoxUrlChange = (event) => {
     const url = event.target.value;
-    setBoxUrlError(url);
+    //setBoxUrlError(url);
     if (!url) {
       setBoxUrlError("Box URL cannot be empty.");
     } else if (!validateUrl(url)) {
@@ -128,19 +164,21 @@ const Form = () => {
 
   const handleDownloadJson = () => {
     const licenseTypesArray = licenses.map((license) => license.type);
-    const licenseUrlsObject = {};
-    licenses.forEach((license) => {
-      licenseUrlsObject[license.type] = license.url;
-    });
+    //const licenseUrlsObject = {};
+    const licenseUrlArray = licenses.map((license) => license.url);
+    // licenses.forEach((license) => {
+    //   licenseUrlsObject[license.type] = license.url;
+    // });
     const data = {
       Package_Name: packageName,
       Package_URL: packageUrl,
-      Task_URL: rtcTaskUrl,
+      //Task_URL: rtcTaskUrl,
       CLA_URL: claUrl,
       Box_URL: boxUrl,
-      Due_Date: dueDate,
+      // Due_Date: dueDate,
       license_types: licenseTypesArray,
-      license_urls: licenseUrlsObject,
+      license_urls: licenseUrlArray
+      //license_urls: licenseUrlsObject,
     };
     console.log(data);
     const filename = 'ossc.json';
@@ -174,28 +212,28 @@ const Form = () => {
           <div className='form-group'>
           <label htmlFor="c_url">CLA URL:</label>
         <input className="form-control" type="url" id="c_url"  value={claUrl} onBlur={handleClaUrlChange} onChange={(event) => setClaUrl(event.target.value)} />
-        {packageUrlError && (
+        {claUrlError && (
             <div className="text-danger">{claUrlError}</div>
           )}
           </div>
-        <div className='form-group'>
+        {/* <div className='form-group'>
         <label htmlFor="r_url">RTC_TASK_URL:</label>
         <input className="form-control" type="url" id="r_url" value={rtcTaskUrl} onChange={(event) => setRtcTaskUrl(event.target.value)} onBlur={handleRtcUrlChange}  />
         {packageUrlError && (
             <div className="text-danger">{rtcUrlError}</div>
           )}
-        </div>
+        </div> */}
        <div className='form-group'>
        <label htmlFor="b_url">Box URL:</label>
         <input className="form-control" type="url" id="b_url" onBlur={handleBoxUrlChange}  value={boxUrl} onChange={(event) => setBoxkUrl(event.target.value)} />
-        {packageUrlError && (
+        {boxUrlError && (
             <div className="text-danger">{boxUrlError}</div>
           )}
        </div>
-      <div className='form-group'>
+      {/* <div className='form-group'>
       <label htmlFor="d_date">Due Date:</label>
         <input className="form-control" type="date" id="d_date"  value={dueDate} onChange={(event) => setDueDate(event.target.value)} />
-      </div>
+      </div> */}
         </form>
         <br></br>
         </div>
@@ -215,12 +253,15 @@ const Form = () => {
             ))}
           </select>
           <label style={{ borderLeft: '10px solid white' }}  htmlFor={`licenseUrl-${index}`}>License URL:</label>
-          <input className="form-group mx-sm-3 mb-2" pattern="https?://.+?\..+" required type="url" id={`licenseUrl-${index}`} value={license.url} onChange={(event) => handleLicenseUrlChange(event, index)} />
+          <input className="form-group mx-sm-3 mb-2" pattern="https?://.+?\..+" required type="url" id={`licenseUrl-${index}`} value={license.url}  onChange={(event) => handleLicenseUrlChange(event, index)} />
           {
                 index ? 
                   <button className="btn btn-danger" type="button"  onClick={() => handleRemoveLicense(index)} >Remove</button> 
                 : null
               }
+                      {/* {licenseUrlError && (
+            <div className="text-danger">{licenseUrlError}</div>
+          )} */}
              
         </div>
       ))}
