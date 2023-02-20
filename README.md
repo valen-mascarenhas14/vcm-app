@@ -1,6 +1,9 @@
-# Getting Started with Create React App
+# OSSC JSON file downloader
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The application is available at : 
+https://valen-mascarenhas14.github.io/vcm-app/
+ 
+Based on the inputs the user provides, it generates and downloads an ossc.json file.
 
 ## Available Scripts
 
