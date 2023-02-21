@@ -37,6 +37,7 @@ const Form = () => {
   const [packageUrl, setPackageUrl] = useState("");
   const [claUrl, setClaUrl] = useState("");
   const [boxUrl, setBoxUrl] = useState("");
+  const [rtcId, setRtcId] = useState("");
 
   const handleLicenseTypeChange = (event, index) => {
     const updatedLicenses = [...licenses];
@@ -61,12 +62,15 @@ const Form = () => {
   };
 
   const handleDownloadJson = () => {
+    let temp_url="https://jazz06.rchland.ibm.com:12443/jazz/web/projects/Power%20Ecosystem#action=com.ibm.team.workitem.viewWorkItem&id=";
+    let final_url=temp_url.concat(rtcId);
     const licenseTypesArray = licenses.map((license) => license.type);
     const licenseUrlArray = licenses.map((license) => license.url);
     const data = {
       Package_Name: packageName,
       Package_URL: packageUrl,
       CLA_URL: claUrl,
+      rtc_task_url: final_url,
       Box_URL: boxUrl,
       license_types: licenseTypesArray,
       license_urls: licenseUrlArray,
@@ -99,6 +103,18 @@ const Form = () => {
                 id="p_name"
                 value={packageName}
                 onChange={(event) => setPackageName(event.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="r_id">RTC Task ID:</label>
+              <input
+                className="form-control"
+                required
+                pattern="^\d{6}$"
+                type="text"
+                id="r_id"
+                value={rtcId}
+                onChange={(event) => setRtcId(event.target.value)}
               />
             </div>
             <div className="form-group">
