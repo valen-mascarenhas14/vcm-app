@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/vcm-app/static/css/main.44f8b8b5.css",
-    "main.js": "/vcm-app/static/js/main.536562ae.js",
+    "main.js": "/vcm-app/static/js/main.52b14277.js",
     "static/js/787.d2dc3989.chunk.js": "/vcm-app/static/js/787.d2dc3989.chunk.js",
     "index.html": "/vcm-app/index.html",
     "main.44f8b8b5.css.map": "/vcm-app/static/css/main.44f8b8b5.css.map",
-    "main.536562ae.js.map": "/vcm-app/static/js/main.536562ae.js.map",
+    "main.52b14277.js.map": "/vcm-app/static/js/main.52b14277.js.map",
     "787.d2dc3989.chunk.js.map": "/vcm-app/static/js/787.d2dc3989.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.44f8b8b5.css",
-    "static/js/main.536562ae.js"
+    "static/js/main.52b14277.js"
   ]
 }
