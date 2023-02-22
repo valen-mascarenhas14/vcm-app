@@ -94,8 +94,8 @@ const Form = () => {
       license_urls: licenseUrlArray,
       cla_url: claUrl,
       task_url: final_url,
-      due_date:"",
       box_folder_url: boxUrl,
+      due_date:"",
     };
     console.log(data);
     const filename = "ossc.json";
