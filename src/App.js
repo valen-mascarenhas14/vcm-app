@@ -41,12 +41,13 @@ const options = [
   "Github Public - Other Org",
   "Linux Foundation",
   "SourceForge",
+  "Other",
 ];
 
 const w_options = [
 "",
-"code contribution",
-"container contribution",
+"Code Contribution",
+"Container Contribution",
 ];
 
 const Form = () => {
