@@ -29,7 +29,7 @@ const licenseTypes = [
   "PHP-3.0",
   "Python-2.0",
   "W3C",
-  "Other"
+  "Other",
 ];
 
 const options = [
@@ -44,11 +44,7 @@ const options = [
   "Other",
 ];
 
-const w_options = [
-"",
-"Code Contribution",
-"Container Contribution",
-];
+const w_options = ["", "Code Contribution", "Container Contribution"];
 
 const Form = () => {
   const [licenses, setLicenses] = useState([{ type: "", url: "" }]);
@@ -57,8 +53,8 @@ const Form = () => {
   const [claUrl, setClaUrl] = useState("");
   const [boxUrl, setBoxUrl] = useState("");
   const [rtcId, setRtcId] = useState("");
-  const [communityOption,setCommunityOption] = useState("");
-  const [wType,setWorkType] = useState("");
+  const [communityOption, setCommunityOption] = useState("");
+  const [wType, setWorkType] = useState("");
 
   const handleLicenseTypeChange = (event, index) => {
     const updatedLicenses = [...licenses];
@@ -83,8 +79,9 @@ const Form = () => {
   };
 
   const handleDownloadJson = () => {
-    let temp_url="https://jazz06.rchland.ibm.com:12443/jazz/web/projects/Power%20Ecosystem#action=com.ibm.team.workitem.viewWorkItem&id=";
-    let final_url=temp_url.concat(rtcId);
+    let temp_url =
+      "https://jazz06.rchland.ibm.com:12443/jazz/web/projects/Power%20Ecosystem#action=com.ibm.team.workitem.viewWorkItem&id=";
+    let final_url = temp_url.concat(rtcId);
     const licenseTypesArray = licenses.map((license) => license.type);
     const licenseUrlArray = licenses.map((license) => license.url);
     const data = {
@@ -117,18 +114,6 @@ const Form = () => {
         <div className="col-sm-8">
           <form onSubmit={handleDownloadJson}>
             <div className="form-group">
-              <label htmlFor="p_name">Package Name:</label>
-              <input
-                className="form-control"
-                required
-                pattern="^(?![0-9]).{3,}$"
-                type="text"
-                id="p_name"
-                value={packageName}
-                onChange={(event) => setPackageName(event.target.value)}
-              />
-            </div>
-            <div className="form-group">
               <label htmlFor="r_id">RTC Task ID:</label>
               <input
                 className="form-control"
@@ -138,6 +123,18 @@ const Form = () => {
                 id="r_id"
                 value={rtcId}
                 onChange={(event) => setRtcId(event.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="p_name">Package Name:</label>
+              <input
+                className="form-control"
+                required
+                pattern="^(?![0-9]).{3,}$"
+                type="text"
+                id="p_name"
+                value={packageName}
+                onChange={(event) => setPackageName(event.target.value)}
               />
             </div>
             <div className="form-group">
@@ -180,34 +177,57 @@ const Form = () => {
             <div className="form-group">
               <div className="row">
                 <div className="col-sm-6">
-                <div className="form-group">
-              <label style={{ borderRight: "10px solid white" }} htmlFor="c_opt">Community:</label>
-                  <select className="form-group mb-2" id="c_opt" required value={communityOption} onChange={(event) => setCommunityOption(event.target.value)} >
-      {options.map((value) => (
-        <option key={value} value={value}>
-          {value}
-        </option>
-      ))}
-    </select>
-            </div>
+                  <div className="form-group">
+                    <label
+                      style={{ borderRight: "10px solid white" }}
+                      htmlFor="c_opt"
+                    >
+                      Community:
+                    </label>
+                    <select
+                      className="form-group mb-2"
+                      id="c_opt"
+                      required
+                      value={communityOption}
+                      onChange={(event) =>
+                        setCommunityOption(event.target.value)
+                      }
+                    >
+                      {options.map((value) => (
+                        <option key={value} value={value}>
+                          {value}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
                 <div className="col-sm-6">
-                <div className="form-group">
-              <label style={{ borderRight: "10px solid white" }} htmlFor="w_type">Contribution Type:</label>
-                  <select className="form-group mb-2" id="w_type" required value={wType} onChange={(event) => setWorkType(event.target.value)} >
-      {w_options.map((value) => (
-        <option key={value} value={value}>
-          {value}
-        </option>
-      ))}
-    </select>
-            </div>
+                  <div className="form-group">
+                    <label
+                      style={{ borderRight: "10px solid white" }}
+                      htmlFor="w_type"
+                    >
+                      Contribution Type:
+                    </label>
+                    <select
+                      className="form-group mb-2"
+                      id="w_type"
+                      required
+                      value={wType}
+                      onChange={(event) => setWorkType(event.target.value)}
+                    >
+                      {w_options.map((value) => (
+                        <option key={value} value={value}>
+                          {value}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
 
-
-<br></br>
+            <br></br>
 
             <div className="row justify-content-center">
               <div className="form-inline col-sm-12">
