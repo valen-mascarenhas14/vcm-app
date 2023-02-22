@@ -162,7 +162,7 @@ const Form = () => {
                 onChange={(event) => setClaUrl(event.target.value)}
               />
             </div>
-            <div className="form-group">
+            {/* <div className="form-group">
               <label htmlFor="b_url">Box URL:</label>
               <input
                 className="form-control"
@@ -174,7 +174,7 @@ const Form = () => {
                 onChange={(event) => setBoxUrl(event.target.value)}
               />
               <br></br>
-            </div>
+            </div> */}
             <div className="form-group">
               <div className="row">
                 <div className="col-sm-6">
