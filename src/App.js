@@ -94,7 +94,7 @@ const Form = () => {
       license_urls: licenseUrlArray,
       cla_url: claUrl,
       task_url: final_url,
-      box_folder_url: boxUrl,
+      box_folder_url: "",
       due_date:"",
     };
     console.log(data);
@@ -156,7 +156,6 @@ const Form = () => {
               <input
                 className="form-control"
                 pattern="https?://.+?\..+"
-                required
                 type="url"
                 id="c_url"
                 value={claUrl}
