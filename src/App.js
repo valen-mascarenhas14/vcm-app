@@ -83,17 +83,19 @@ const Form = () => {
       "https://jazz06.rchland.ibm.com:12443/jazz/web/projects/Power%20Ecosystem#action=com.ibm.team.workitem.viewWorkItem&id=";
     let final_url = temp_url.concat(rtcId);
     const licenseTypesArray = licenses.map((license) => license.type);
+    let final_license_type=licenseTypesArray.toString();
     const licenseUrlArray = licenses.map((license) => license.url);
     const data = {
-      Package_Name: packageName,
-      Package_URL: packageUrl,
-      CLA_URL: claUrl,
-      rtc_task_url: final_url,
-      Box_URL: boxUrl,
-      Community: communityOption,
-      Contribution_Type: wType,
-      license_types: licenseTypesArray,
+      contribution: wType,
+      package_name: packageName,
+      package_url: packageUrl,
+      community: communityOption,
+      license: final_license_type,
       license_urls: licenseUrlArray,
+      cla_url: claUrl,
+      task_url: final_url,
+      due_date:"",
+      box_folder_url: boxUrl,
     };
     console.log(data);
     const filename = "ossc.json";
