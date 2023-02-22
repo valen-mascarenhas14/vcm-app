@@ -43,6 +43,12 @@ const options = [
   "SourceForge",
 ];
 
+const w_options = [
+"",
+"code contribution",
+"container contribution",
+];
+
 const Form = () => {
   const [licenses, setLicenses] = useState([{ type: "", url: "" }]);
   const [packageName, setPackageName] = useState("");
@@ -51,6 +57,7 @@ const Form = () => {
   const [boxUrl, setBoxUrl] = useState("");
   const [rtcId, setRtcId] = useState("");
   const [communityOption,setCommunityOption] = useState("");
+  const [wType,setWorkType] = useState("");
 
   const handleLicenseTypeChange = (event, index) => {
     const updatedLicenses = [...licenses];
@@ -86,6 +93,7 @@ const Form = () => {
       rtc_task_url: final_url,
       Box_URL: boxUrl,
       Community: communityOption,
+      Contribution_Type: wType,
       license_types: licenseTypesArray,
       license_urls: licenseUrlArray,
     };
@@ -169,8 +177,11 @@ const Form = () => {
               <br></br>
             </div>
             <div className="form-group">
+              <div className="row">
+                <div className="col-sm-6">
+                <div className="form-group">
               <label style={{ borderRight: "10px solid white" }} htmlFor="c_opt">Community:</label>
-                  <select id="c_opt" required value={communityOption} onChange={(event) => setCommunityOption(event.target.value)} >
+                  <select className="form-group mb-2" id="c_opt" required value={communityOption} onChange={(event) => setCommunityOption(event.target.value)} >
       {options.map((value) => (
         <option key={value} value={value}>
           {value}
@@ -178,6 +189,23 @@ const Form = () => {
       ))}
     </select>
             </div>
+                </div>
+                <div className="col-sm-6">
+                <div className="form-group">
+              <label style={{ borderRight: "10px solid white" }} htmlFor="w_type">Contribution Type:</label>
+                  <select className="form-group mb-2" id="w_type" required value={wType} onChange={(event) => setWorkType(event.target.value)} >
+      {w_options.map((value) => (
+        <option key={value} value={value}>
+          {value}
+        </option>
+      ))}
+    </select>
+            </div>
+                </div>
+              </div>
+            </div>
+
+
 <br></br>
 
             <div className="row justify-content-center">
