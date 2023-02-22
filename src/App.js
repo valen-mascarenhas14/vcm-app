@@ -29,6 +29,18 @@ const licenseTypes = [
   "PHP-3.0",
   "Python-2.0",
   "W3C",
+  "Other"
+];
+
+const options = [
+  "",
+  "Apache Software Foundation",
+  "DockerHub",
+  "Eclipse Foundation",
+  "GitHub Public - IBM Org",
+  "Github Public - Other Org",
+  "Linux Foundation",
+  "SourceForge",
 ];
 
 const Form = () => {
@@ -38,6 +50,7 @@ const Form = () => {
   const [claUrl, setClaUrl] = useState("");
   const [boxUrl, setBoxUrl] = useState("");
   const [rtcId, setRtcId] = useState("");
+  const [communityOption,setCommunityOption] = useState("");
 
   const handleLicenseTypeChange = (event, index) => {
     const updatedLicenses = [...licenses];
@@ -72,6 +85,7 @@ const Form = () => {
       CLA_URL: claUrl,
       rtc_task_url: final_url,
       Box_URL: boxUrl,
+      Community: communityOption,
       license_types: licenseTypesArray,
       license_urls: licenseUrlArray,
     };
@@ -141,7 +155,6 @@ const Form = () => {
                 onChange={(event) => setClaUrl(event.target.value)}
               />
             </div>
-
             <div className="form-group">
               <label htmlFor="b_url">Box URL:</label>
               <input
@@ -155,6 +168,17 @@ const Form = () => {
               />
               <br></br>
             </div>
+            <div className="form-group">
+              <label style={{ borderRight: "10px solid white" }} htmlFor="c_opt">Community:</label>
+                  <select id="c_opt" required value={communityOption} onChange={(event) => setCommunityOption(event.target.value)} >
+      {options.map((value) => (
+        <option key={value} value={value}>
+          {value}
+        </option>
+      ))}
+    </select>
+            </div>
+<br></br>
 
             <div className="row justify-content-center">
               <div className="form-inline col-sm-12">
