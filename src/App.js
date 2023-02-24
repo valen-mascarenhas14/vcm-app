@@ -152,11 +152,10 @@ const Form = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="c_url">CLA URL:</label>
+              <label htmlFor="c_url">CLA :</label>
               <input
                 className="form-control"
-                pattern="https?://.+?\..+"
-                type="url"
+                type="text"
                 id="c_url"
                 value={claUrl}
                 onChange={(event) => setClaUrl(event.target.value)}
