@@ -92,7 +92,7 @@ const Form = () => {
       community: communityOption,
       license: final_license_type,
       license_urls: licenseUrlArray,
-      cla_url: claUrl,
+      cla: claUrl,
       task_url: final_url,
       box_folder_url: "",
       due_date:"",
