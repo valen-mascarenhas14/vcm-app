@@ -44,7 +44,7 @@ const options = [
   "Other",
 ];
 
-const w_options = ["", "Code Contribution", "Container Contribution"];
+const w_options = ["", "code", "container"];
 
 const Form = () => {
   const [licenses, setLicenses] = useState([{ type: "", url: "" }]);
