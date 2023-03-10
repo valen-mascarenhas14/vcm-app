@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 // Bootstrap Bundle JS
 import "bootstrap/dist/js/bootstrap.bundle.min";
+import "./App.css"
 
 const licenseTypes = [
   "Apache-2.0",
@@ -79,12 +80,16 @@ const Form = () => {
   };
 
   const handleDownloadJson = () => {
+    let final_claUrl="";
     let temp_url =
       "https://jazz06.rchland.ibm.com:12443/jazz/web/projects/Power%20Ecosystem#action=com.ibm.team.workitem.viewWorkItem&id=";
     let final_url = temp_url.concat(rtcId);
     const licenseTypesArray = licenses.map((license) => license.type);
     let final_license_type=licenseTypesArray.toString();
     const licenseUrlArray = licenses.map((license) => license.url);
+    if (claUrl === null || claUrl === undefined || claUrl === "") {
+      final_claUrl = claUrl.concat("None");
+    }
     const data = {
       contribution: wType,
       package_name: packageName,
@@ -92,7 +97,7 @@ const Form = () => {
       community: communityOption,
       license: final_license_type,
       license_urls: licenseUrlArray,
-      cla: claUrl,
+      cla: final_claUrl,
       task_url: final_url,
       box_folder_url: "",
       due_date:"",
@@ -116,7 +121,7 @@ const Form = () => {
         <div className="col-sm-8">
           <form onSubmit={handleDownloadJson}>
             <div className="form-group">
-              <label htmlFor="r_id">RTC Task ID:</label>
+              <label htmlFor="r_id">RTC Task ID: &nbsp;&nbsp;&nbsp; <span id="vcm"> (For eg. 796723) </span>  </label>
               <input
                 className="form-control"
                 required
@@ -152,7 +157,7 @@ const Form = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="c_url">CLA :</label>
+            <label htmlFor="c_url">CLA: &nbsp;&nbsp;&nbsp; <span id="vcm">Enter a valid CLA URL (or leave blank)</span> </label>
               <input
                 className="form-control"
                 pattern="https?://.+?\..+"
