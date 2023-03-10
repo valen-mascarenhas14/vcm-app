@@ -80,16 +80,16 @@ const Form = () => {
   };
 
   const handleDownloadJson = () => {
-    let final_claUrl="";
+    //let final_claUrl="";
     let temp_url =
       "https://jazz06.rchland.ibm.com:12443/jazz/web/projects/Power%20Ecosystem#action=com.ibm.team.workitem.viewWorkItem&id=";
     let final_url = temp_url.concat(rtcId);
     const licenseTypesArray = licenses.map((license) => license.type);
     let final_license_type=licenseTypesArray.toString();
     const licenseUrlArray = licenses.map((license) => license.url);
-    if (claUrl === null || claUrl === undefined || claUrl === "") {
-      final_claUrl = claUrl.concat("None");
-    }
+    // if (claUrl === null || claUrl === undefined || claUrl === "") {
+    //   final_claUrl = claUrl.concat("None");
+    // }
     const data = {
       contribution: wType,
       package_name: packageName,
@@ -97,7 +97,7 @@ const Form = () => {
       community: communityOption,
       license: final_license_type,
       license_urls: licenseUrlArray,
-      cla: final_claUrl,
+      cla: claUrl,
       task_url: final_url,
       box_folder_url: "",
       due_date:"",
@@ -157,11 +157,12 @@ const Form = () => {
               />
             </div>
             <div className="form-group">
-            <label htmlFor="c_url">CLA: &nbsp;&nbsp;&nbsp; <span id="vcm">Enter a valid CLA URL (or leave blank)</span> </label>
+            <label htmlFor="c_url">CLA: &nbsp;&nbsp;&nbsp; <span id="vcm"> &lt; URL &gt; or None </span> </label>
               <input
                 className="form-control"
-                pattern="https?://.+?\..+"
-                type="url"
+                pattern="https?://.+?\..+|^None$"
+                type="text"
+                required
                 id="c_url"
                 value={claUrl}
                 onChange={(event) => setClaUrl(event.target.value)}
